@@ -51,9 +51,9 @@ def ms_translate(content_text):
             conn.putheader('X-ClientTraceId', str(uuid.uuid4()))
             conn.endheaders()
             conn.send(text)
-            print(conn.getresponse())
-            logging.debug('\n')
-            return ""
+            output = json.loads(conn.getresponse())[0]['translations'][0]['text']
+            print(output)
+            return output
 
     except Exception as e:
             logging.error(e)
